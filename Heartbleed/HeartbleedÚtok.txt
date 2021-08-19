@@ -1,0 +1,13 @@
+Popis útoku
+===========
+
+Název
+-----
+Heartbleed útok
+
+
+Popis útoku
+-----------
+Útočník dokáže s pomocí útoku na zranitelný systém získat 64 KB RAM paměti operačního systému po zaslaní
+jedné Heartbeat správy. Tohle může útočník využit na získaní citlivých dát z paměti jako například šifrovací
+klíče.

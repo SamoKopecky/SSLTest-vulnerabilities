@@ -1,0 +1,67 @@
+Popis zranitelnosti
+===================
+
+Název
+-----
+Heartbleed
+
+
+Popis zranitelnosti
+-------------------
+Zranitelnost umožňuje získat bloky dát o velkosti 64 KB z paměti zranitelného operačního systém.
+Zranitelnost je přítomná vo verzí knihovny OpenSSL 1.0.1 až 1.0.1f.
+
+
+Příčiny
+-------
+Příčinou je nedostatečná kontrola délky Heartbeat zpráv a jejich obsahu knihovnou OpenSSL. Knihovna
+nekontroluje délku skutečného obsahů zpráv a kontroluje jenom zadanou délku správy.
+
+
+Projevy
+-------
+Zranitelnost se projevuje zvýšením výstupné síťové komunikace když je zranitelnost využitá na získaní
+velkého objemu dát z operační paměti systému. 
+
+
+Dopady
+------
+Útočník je schopen získat obsah operační paměti systému. Když sa v paměti nachází kľíče určené na šifrovaní
+tak je útočník schopný ukrást týto klíče a následně získat přístup k citlivým datům když zachytává veškerou
+zašifrovanou komunikaci.
+
+
+Náprava / doporučení
+--------------------
+Náprava spočívá v aktualizaci knihovny OpenSSL na verzi větší jako 1.0.1f a všech programú které túto
+knihovnu využívají.
+
+
+Závažnost
+---------
+Kritická
+
+
+CVSS skóre
+----------
+7.5
+
+
+CVSS string
+-----------
+CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N
+
+
+CVE
+---
+CVE-2014-0160
+
+
+CWE
+---
+CWE-126: Buffer Over-read
+
+
+Možné útoky
+-----------
+Útok na důvěryhodnost přenášených dat.
