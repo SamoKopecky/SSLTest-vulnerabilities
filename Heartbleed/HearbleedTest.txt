@@ -11,7 +11,7 @@ Heartbleed test
 
 Cíl testu - úkol (Black Box)
 ----------------------------
-Ověřte, že testovaný systém posíla správně odpovědě na dotazy SSL/TLS rozšíření Heartbeat.
+Ověřte, že testovaný systém posíla správné odpovědě na dotazy SSL/TLS rozšíření Heartbeat.
 
 
 Popis testu (Black Box)
