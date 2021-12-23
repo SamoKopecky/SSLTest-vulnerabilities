@@ -1,5 +1,11 @@
 #!/bin/bash
 
+create_file () {
+	TEMP=""
+	printf -v TEMP "%s%s" $1 $2
+	touch $TEMP
+}
+
 BASE_DIR=$(pwd)
 while read p; do
 	cd $BASE_DIR
@@ -11,9 +17,4 @@ while read p; do
 	create_file $NAME "Zraniťelnosť.txt"	
 done <tests.txt
 
-create_file () {
-	TEMP=""
-	printf -v TEMP "%s%s" $1 $2
-	touch $TEMP
-}
 
