@@ -1,0 +1,14 @@
+BREACH
+CCS Injection
+CRIME
+DROWN
+Fallback SCSV
+Foward Secrecy
+FREAK
+HSTS
+Heartbleed
+Renegotiation
+LOGJAM
+RC4 Support
+Session Ticket
+SWEET32
