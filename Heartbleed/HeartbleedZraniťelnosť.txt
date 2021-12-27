@@ -8,33 +8,27 @@ Heartbleed
 
 Popis zranitelnosti
 -------------------
-Zranitelnost umožňuje získat bloky dát o velkosti 64 KB z paměti zranitelného operačního systém.
-Zranitelnost je přítomná vo verzí knihovny OpenSSL 1.0.1 až 1.0.1f.
+Zranitelnost umožňuje získat náhodné bloky dát o velkosti 64 KB z paměti zranitelného operačního systém. Chyba která vede k zranitelnosti není způsobená chybnou definici protokolu TLS ale právě chybnou implementaci vo verzí knihovny OpenSSL 1.0.1 až 1.0.1f. Zranitelnost využívá Heartbeat protokol který poskytuje keep-alive funkcionalitu v protokolu TLS. Tahle funkcionalita je docílená posíláním správ Heartbeat Request ve které se nachází náhodné data které potom musí příjemce Heartbeat správy poslat zpět. V těchto Heartbeat Request správách sa taktéž nachází pole payload_length které určuje délku náhodný dat. Když útočník pošle Heartbeat Request správu z délkou větší jako samotné náhodné data správy tak oběť je nucená poslat zpátky náhodné data plus další data z paměti OS tak aby se součet tyhle dat rovnal délce určené v poli payload_length.
 
 
 Příčiny
 -------
-Příčinou je nedostatečná kontrola délky Heartbeat zpráv a jejich obsahu knihovnou OpenSSL. Knihovna
-nekontroluje délku skutečného obsahů zpráv a kontroluje jenom zadanou délku správy.
+Příčinou je nedostatečná kontrola délky Heartbeat zpráv a jejich obsahu knihovnou OpenSSL. Knihovna nekontroluje délku skutečného obsahů zpráv a kontroluje jenom zadanou délku správy.
 
 
 Projevy
 -------
-Zranitelnost se projevuje zvýšením výstupné síťové komunikace když je zranitelnost využitá na získaní
-velkého objemu dát z operační paměti systému. 
+Zranitelnost se projevuje zvýšením výstupné síťové komunikace když je zranitelnost využitá na získaní velkého objemu dát z operační paměti systému. 
 
 
 Dopady
 ------
-Útočník je schopen získat obsah operační paměti systému. Když sa v paměti nachází kľíče určené na šifrovaní
-tak je útočník schopný ukrást týto klíče a následně získat přístup k citlivým datům když zachytává veškerou
-zašifrovanou komunikaci.
+Útočník je schopen získat náhodný obsah operační paměti systému z jedné Heartbeat správy přičemž muže těchto správ posílat více k získaní většího obsahu paměti OS. Tohle může útočník využít na získaní citlivých dát z paměti jako například šifrovací klíče, hesla, privátní klíče a jiné citlivé informace. Získaní těchto informací může vést ke kompromisu integrity, důvěryhodnosti komunikace a autentizace komunikačních stran.
 
 
 Náprava / doporučení
 --------------------
-Náprava spočívá v aktualizaci knihovny OpenSSL na verzi větší jako 1.0.1f a všech programú které túto
-knihovnu využívají.
+Náprava spočívá v aktualizaci knihovny OpenSSL na verzi větší jako 1.0.1f a všech programů které tuto knihovnu využívají. Když bily kompromitované privátní klíče X.509 certifikátu je potřeba tyto klíče vygenerovat znova protože útočník může nadále využívat získané klíče na další útoky. Totéž platí u kompromitovaných hesel.
 
 
 Závažnost

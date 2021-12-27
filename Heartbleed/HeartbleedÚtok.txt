@@ -8,6 +8,4 @@ Heartbleed útok
 
 Popis útoku
 -----------
-Útočník dokáže s pomocí útoku na zranitelný systém získat 64 KB RAM paměti operačního systému po zaslaní
-jedné Heartbeat správy. Tohle může útočník využit na získaní citlivých dát z paměti jako například šifrovací
-klíče.
+Útočníkovy stačí posílat TLS ClientHello zprávy z rozšířením Heartbeat v které před odesláním modifikuje délku pole payload_length. Toto pole musí nastavit na délku vetší jako samotný payload Heartbeat Request zprávy tak aby oběť posílala náhodnou část své paměti. Po odeslaní více takto upravených správ může útočník pro příklad privátní klíče X.509 certifikátu které sóu uložené v paměti OS oběti.
