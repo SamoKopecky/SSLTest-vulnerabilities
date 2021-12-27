@@ -1,0 +1,17 @@
+Popis útoku
+===========
+
+Název
+-----
+
+
+Rodičovský útok (pouze pokud se jedná o variantu útoku)
+-------------------------------------------------------
+
+
+Popis útoku
+-----------
+
+
+Dopady (Vyplnit pouze pokud se nejedná o variantu útoku)
+--------------------------------------------------------

@@ -1,0 +1,54 @@
+Popis zranitelnosti
+===================
+
+Název
+-----
+
+
+Popis zranitelnosti
+-------------------
+
+
+Příčiny
+-------
+Příčinou je ...
+
+
+Projevy
+-------
+Zranitelnost se projevuje ...
+
+
+Dopady
+------
+Útočník ...
+
+
+Náprava / doporučení
+--------------------
+Náprava spočívá v ...
+
+
+Závažnost
+---------
+Informační / Nízká / Střední / Vysoká / Kritická
+
+
+CVSS skóre
+----------
+
+
+CVSS string
+-----------
+
+
+CVE
+---
+
+
+CWE
+---
+
+
+Možné útoky
+-----------
