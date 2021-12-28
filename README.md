@@ -4,7 +4,7 @@ Notes for the `Penterep Tools` vulnerabilities
 SSLTest tool: https://github.com/SamoKopecky/SSLTest
 
 ## Notes done for
-- [ ] BREACH
+- [x] BREACH
 - [ ] CCS Injection
 - [ ] CRIME
 - [ ] DROWN
