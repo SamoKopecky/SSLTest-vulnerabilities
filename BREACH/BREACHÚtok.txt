@@ -3,15 +3,13 @@ Popis útoku
 
 Název
 -----
+BREACH (Browser Reconnaissance and Exfiltration via Adaptive Compression of Hypertext)
 
-
-Rodičovský útok (pouze pokud se jedná o variantu útoku)
--------------------------------------------------------
+Rodičovský útok
+---------------
+MitM nebo phishing útok které sou potřebné na provedení BREACH útoku.
 
 
 Popis útoku
 -----------
-
-
-Dopady (Vyplnit pouze pokud se nejedná o variantu útoku)
---------------------------------------------------------
+Útočník nejprve musí získat přístup k oběti který mú dovoluje posílat HTTP dotazy na zranitelný webový server a který mu umožňuje sledovat délku HTTP odpovědí. Následně bude zasílat HTTP dotazy na zranitelný server v kterých bude měnit uživatelský vstup který se projeví v HTTP odpovědi. Když útočník dostane odpověď která má délku menší jako ostatní má potvrzené že právě tahle volba parametru je správná protože se shoduje nejvíc z hledanou hodnotou. Toto může útočník opakovat pro každý znak tokenu nebo parametru v HTTP hlavičce který chce útočník odhalit.

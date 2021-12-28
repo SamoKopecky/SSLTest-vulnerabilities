@@ -3,52 +3,59 @@ Popis zranitelnosti
 
 Název
 -----
+BREACH (Browser Reconnaissance and Exfiltration via Adaptive Compression of Hypertext)
 
 
 Popis zranitelnosti
 -------------------
+BREACH je zranitelnost, která využívá kompresní HTTP metody gzip a deflate. Komprese pomáhá při redukovaní množství informace, které je potřebné poslat tým že když se posílá jedno slovo mnoho krát je možné toto slovo reprezentovat jako kód který má menší velkost jako původní slovo. Toto vede k snížení potřebné šířky pásma pro přenos HTTP dát. Komprese se určuje podle pole Accept-Encoding v HTTP správách. Zranitelné metody jsou gzip a deflate. BREACH zranitelnost využívá této metody k odhalení zašifrovaných a zkomprimovaných parametrů, které se nachází v HTTP hlavičkách. Odhlení tajných informací pracuje na základe porovnávaní délky přímených odpovědí na HTTP dotazy. Když je délka jedné HTTP odpovědi menší jako všechny ostatní je z toho poznat že parametr který útočník mění v každém dotazu se rovná hledané položce v HTTP odpovědi.
 
 
 Příčiny
 -------
-Příčinou je ...
+Příčinou je existence tkz. compression oracle který umožňuje z délky komprimovaných dát zjistit jestli se nějaká sequence dát opakuje v HTTP odpovědi.
 
 
 Projevy
 -------
-Zranitelnost se projevuje ...
+Zranitelnost se projevuje zvýšením obsahu sítového přenosu protože útočník musí posílat několika tisíce požadavku na zranitelný server aby dokázal odhalit zašifrované informace.
 
 
 Dopady
 ------
-Útočník ...
+Útočník dokáže získat citlivé informace z HTTP hlavičky jako například cookie parametre nebo jiné tokeny které webový server využívá k autentizaci které může dále zneužít pro zosobnění oběti. Dále je útočník schopný získávat i další citlivé informace jako například čísla kreditních karet když jsou zobrazené v tele HTTP správy, kde taky existuje uživatelský vstup pomocí kterého útočník dotazuje compression oracla.
 
 
 Náprava / doporučení
 --------------------
-Náprava spočívá v ...
+Náprava spočívá v deaktivaci kompresních metod gzip a deflate poskytovaných webovým serverem.
 
 
 Závažnost
 ---------
-Informační / Nízká / Střední / Vysoká / Kritická
+Střední
 
 
 CVSS skóre
 ----------
+5.9
 
 
 CVSS string
 -----------
+CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N
 
 
 CVE
 ---
+CVE-2013-3587
 
 
 CWE
 ---
+CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
 
 
 Možné útoky
 -----------
+Získaní cookie tokenu oběti.

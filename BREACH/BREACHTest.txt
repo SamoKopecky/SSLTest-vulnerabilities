@@ -3,75 +3,86 @@ Popis testu
 
 Název
 -----
-
+BREACH (Browser Reconnaissance and Exfiltration via Adaptive Compression of Hypertext)
 
 ============================================================================================================
 
 
 Cíl testu - úkol (Black Box)
 ----------------------------
-Ověřte, že ...
+Ověřte, že testovaný webový server nepovoluje ustanovení komprese typu gzip a deflate.
+
 
 Popis testu (Black Box)
 -----------------------
-Úkolem tohoto testu je ověřit, zda ...
+Úkolem tohoto testu je ověřit, zda testovaný server odmítne prvotní GET/HEAD HTTP požadavek který obsahuje pole Accept-Encoding: gzip,deflate.
 
 
 Jak provést test manuálně (Black Box)
 -------------------------------------
+Pro otestovaní je potřeba zaslat GET/HEAD požadavek který obsahuje pole Accept-Encoding: gzip,deflate například pomocí programu curl a následně je potřeba sledovat odpověď systému na tento požadavek. Jestli server pošle odpověď na zaslaný požadavek který obsahuje jednu nebo obě z těchto kompresních metod tak může být server zranitelný.
 
 
 Jak provést test pomocí automatických nástrojů (Black Box)
 ----------------------------------------------------------
+Test lze provést pomocí nástroje SSLTest z přepínačem -t 1.
 
 
 Možné výsledky testu (Black Box)
 --------------------------------
+Když server odpoví na GET/HEAD požadavek z přijatými kompresními metodami ještě to neznamená že server je 100% zranitelný. Server musí taktéž být zranitelný na útok který umožní útočníkovy posílat HTTP požadavky na zranitelný server pomocí oběti která má přístup do zranitelného systému. Útočník musí taktéž mít možnost porovnávat délku HTTP odpovědí. Tohle se dá docílit pomocí útoku typu MitM (Man in the Middle) nebo phishingu.
 
 
 Obtížnost (Black Box)
 ---------------------
-Snadné / Střední / Obtížné
+Střední
 
 
 Časová náročnost v minutách (Black Box)
 ---------------------------------------
-
+5 minut
 
 ============================================================================================================
 
 
 Cíl testu - úkol (White Box)
 ----------------------------
+Ověřte, že je webový serer správně nakonfigurován a nevyužívá kompresní metody gzip a deflate.
 
 
 Popis testu (White Box)
 -----------------------
+Úkolem tohoto testu je ověřit, že se v konfiguračních souborech nenachází konfigurace kompresních metod gzip a deflate.
 
 
 Jak provést test manuálně (White Box)
 -------------------------------------
+Konkrétní postup pro ověření konfiguračních souboru záleží na implementací webového serveru. Pro nginx webový server sa tato konfigurace nachází v souboru /usr/local/nginx/nginx.conf.
 
 
 Jak provést test pomocí automatických nástrojů (White Box)
 ----------------------------------------------------------
+Test lze provést pomocí nástroje SSLTest z přepínačem -t 1.
 
 
 Možné výsledky testu (White Box)
 --------------------------------
-
+Když má server nakonfigurovaní kompresní metody gzip nebo deflate, stále to neznamená že server je zranitelný na BREACH. Server musí taktéž být zranitelný na útok který umožní útočníkovy posílat HTTP požadavky na zranitelný server pomocí oběti která má přístup do zranitelného systému. Útočník musí taktéž mít možnost porovnávat délku HTTP odpovědí. Tohle se dá docílit pomocí útoku typu MitM (Man in the Middle) nebo phishingu.
 
 Obtížnost (White Box)
 ---------------------
-Snadné / Střední / Obtížné
+Snadné
 
 
 Časová náročnost v minutách (White Box)
 ---------------------------------------
-
+2 minuty
 
 
 ============================================================================================================
 
 Reference
 ---------
+https://www.breachattack.com/
+https://www.acunetix.com/blog/articles/breach-attack/
+https://resources.infosecinstitute.com/topic/the-breach-attack/

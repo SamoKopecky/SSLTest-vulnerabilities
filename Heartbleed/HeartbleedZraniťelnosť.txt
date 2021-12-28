@@ -58,4 +58,4 @@ CWE-126: Buffer Over-read
 
 Možné útoky
 -----------
-Útok na důvěryhodnost přenášených dat.
+Získaní privátních klíčů X.509 certifikátu.
