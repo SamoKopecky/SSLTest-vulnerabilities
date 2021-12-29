@@ -33,7 +33,7 @@ Náprava spočívá v aktualizaci knihovny OpenSSL na verzi větší jako 1.0.1f
 
 Závažnost
 ---------
-Kritická
+Vysoká
 
 
 CVSS skóre
@@ -53,7 +53,7 @@ CVE-2014-0160
 
 CWE
 ---
-CWE-126: Buffer Over-read
+CWE-119: Improper Restriction of Operations within the Bounds of a Memory Buffer
 
 
 Možné útoky

@@ -3,52 +3,59 @@ Popis zranitelnosti
 
 Název
 -----
+CCS (Change Cipher Spec) Injection 
 
 
 Popis zranitelnosti
 -------------------
+Zranitelnost CCS Injection je chyba v implementaci protokolu TLS v knihovně OpenSSL. Prvá fáze protokolu TLS pri vytvoření zabezpečeného spojení je ustanovení společného klíče (session_key) z komunikujícími stranami. Pro výpočet tohohle klíče sa využívají 2 náhodné hodnoty (Server a Klient nonce) a stranami sdílené tajemství (pre_master_secret). Po vypočtení tohohle klíče si obe strany zašlou správu CCS (Change Cipher Spec) která indikuje že spojení od této chvíle bude probíhat jednom zašifrovaně. Když je ale správa CCS poslaná dříve než si uživatelé vymění sdílené tajemství, použijí sa výpočet společného klíče jenom 2 náhodné hodnoty které byli zaslané na začátku komunikace. Útočník je tedy schopný zachytit tyhle dve náhodné hodnoty a umí si vypočítat klíč kterým muže dešifrovat veškerou komunikaci.
 
 
 Příčiny
 -------
-Příčinou je ...
+Příčinou je špatná implementace protokolu TLS knihovnou OpenSSL která nekontroluje jestli bylo společné tajemství ustanoveno dřív než byla zaslaná správa CCS. 
 
 
 Projevy
 -------
-Zranitelnost se projevuje ...
+Zranitelnost se projevuje jako MitM útok. TODO: finish
 
 
 Dopady
 ------
-Útočník ...
+Útočník je schopný využít tuhle zranitelnost na dešifrovaní veškerého přenosu mezi dvěma komunikujícími stranami.
 
 
 Náprava / doporučení
 --------------------
-Náprava spočívá v ...
+Náprava spočívá v aktualizaci OpenSSL verze na verzi která nespadá do tyhle verzí: verze menší než 0.9.8za, verze mezi 1.0.0 do 1.0.0m a verze mezi 1.0.1 do 1.0.1h
 
 
 Závažnost
 ---------
-Informační / Nízká / Střední / Vysoká / Kritická
+Vysoká
 
 
 CVSS skóre
 ----------
+7.4
 
 
 CVSS string
 -----------
+CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N
 
 
 CVE
 ---
+CVE-2014-0224
 
 
 CWE
 ---
+CWE-326: Inadequate Encryption Strength
 
 
 Možné útoky
 -----------
+Útok na důvěryhodnost dát zabezpečenou protokolem TLS

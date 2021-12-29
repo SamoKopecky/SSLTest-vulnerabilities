@@ -3,15 +3,14 @@ Popis útoku
 
 Název
 -----
+CCS (Change Cipher Spec) Injection 
 
 
 Rodičovský útok (pouze pokud se jedná o variantu útoku)
 -------------------------------------------------------
+MitM (Man in the Middle) útok který je potřebný pro využití této zranitelnosti.
 
 
 Popis útoku
 -----------
-
-
-Dopady (Vyplnit pouze pokud se nejedná o variantu útoku)
---------------------------------------------------------
+Před tým než útočník začne využívat tuhle zranitelnost musí zachytit náhodné hodnoty které se posílají v správách Client a Server Hello. Následné zašle CCS (Change Cipher Spec) správu před ustanovení společného klíče (session_key) který se využívá na šifrovaní komunikace. Po zaslaní správy je vygenerovaný klíč vypočítaný jenom z náhodný hodnot které útočník zachytil. Útočník je teď schopen dešifrovat komunikaci a tým pádem ji měnit nebo číst.

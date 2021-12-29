@@ -3,75 +3,86 @@ Popis testu
 
 Název
 -----
-
+CCS (Change Cipher Spec) Injection 
 
 ============================================================================================================
 
 
 Cíl testu - úkol (Black Box)
 ----------------------------
-Ověřte, že ...
+Ověřte, že testovaný systém správně zvládá situaci v které je CCS správa poslaná dříve jako je ustanovený sdílený klíč při vytváření spojení pomocí TLS protokolu.
+
 
 Popis testu (Black Box)
 -----------------------
-Úkolem tohoto testu je ověřit, zda ...
+Úkolem tohoto testu je ověřit, zda testovaný systém ignoruje CCS správy které sú poslané před ustanovením sdíleného klíče.
 
 
 Jak provést test manuálně (Black Box)
 -------------------------------------
+Pro otestovaní této zranitelnosti je potřeba poslat CCS správu definovanou protokolem TLS hned po zaslaní ClientHello zprávy.
 
 
 Jak provést test pomocí automatických nástrojů (Black Box)
 ----------------------------------------------------------
+Test lze provést pomocí nástroje SSLTest z přepínačem -t 2.
 
 
 Možné výsledky testu (Black Box)
 --------------------------------
+Test vý stoprocentně určit jestli je testovaný systém zranitelný na CCS injection. Když systém odpoví správou typu alert a nepokračuje v inicializaci TLS spojení tak systém není zranitelný. Když je proces inicializace pokračuje zranitelnost lze zneužít na daném systému.
 
 
 Obtížnost (Black Box)
 ---------------------
-Snadné / Střední / Obtížné
+Střední
 
 
 Časová náročnost v minutách (Black Box)
 ---------------------------------------
-
+10 minut
 
 ============================================================================================================
 
 
 Cíl testu - úkol (White Box)
 ----------------------------
+Ověřte, že testovaný systém používá správnou verzi knihovny OpenSSL.
 
 
 Popis testu (White Box)
 -----------------------
+Úkolem tohoto testu je ověřit, zda testovaný systému nevyužívá knihovnu OpenSSL verze menší než 0.9.8za, verze mezi 1.0.0 do 1.0.0m a verze mezi 1.0.1 do 1.0.1h.
 
 
 Jak provést test manuálně (White Box)
 -------------------------------------
+Verze knihovny OpenSSL se dá zjistit pomocí příkazu openssl version.
 
 
 Jak provést test pomocí automatických nástrojů (White Box)
 ----------------------------------------------------------
+Test lze provést pomocí nástroje SSLTest z přepínačem -t 2.
 
 
 Možné výsledky testu (White Box)
 --------------------------------
+Jestli je používaná OpenSSL knihovna v zmiňovaném rozmezí v popisu testu tak je server zranitelný na CCS Injection.
 
 
 Obtížnost (White Box)
 ---------------------
-Snadné / Střední / Obtížné
+Snadné
 
 
 Časová náročnost v minutách (White Box)
 ---------------------------------------
-
+2 minuty
 
 
 ============================================================================================================
 
 Reference
 ---------
+https://www.redhat.com/en/blog/openssl-mitm-ccs-injection-attack-cve-2014-0224
+https://www.vut.cz/www_base/zav_prace_soubor_verejne.php?file_id=227273
