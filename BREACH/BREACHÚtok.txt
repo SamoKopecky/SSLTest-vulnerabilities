@@ -7,7 +7,7 @@ BREACH (Browser Reconnaissance and Exfiltration via Adaptive Compression of Hype
 
 Rodičovský útok
 ---------------
-MitM nebo phishing útok které sou potřebné na provedení BREACH útoku.
+Phishing útok který je potřebný na provedení BREACH útoku. Pomocí phishing útoku je útočník schopný infikovat webový prohlížeč oběti tak aby mohl zasílat HTTP dotazy a sledovat odpovědi těchto dotazů (napr. JavaScript code injection).
 
 
 Popis útoku

@@ -3,75 +3,84 @@ Popis testu
 
 Název
 -----
-
+CRIME (Compression Ratio Info-leak Made Easy)
 
 ============================================================================================================
 
 
 Cíl testu - úkol (Black Box)
 ----------------------------
-Ověřte, že ...
+Ověřte, že webový server nepodporuje ustanovení komprese typu deflate při vytvářeni spojení pomocí protokolu SSL/TLS.
+
 
 Popis testu (Black Box)
 -----------------------
-Úkolem tohoto testu je ověřit, zda ...
+Úkolem tohoto testu je ověřit, zda webový server správně odmítne inicializaci spojení s kompresní metodou deflate.
 
 
 Jak provést test manuálně (Black Box)
 -------------------------------------
+Pro otestovaní webového serveru je potřeba zaslat TLS správu ClientHello. Tato správa musí mít parametr Compression Methods nastavený na hodnotu 0x01 což je ekvivalent k metodě typu deflate.
 
 
 Jak provést test pomocí automatických nástrojů (Black Box)
 ----------------------------------------------------------
+Test lze provést pomocí nástroje SSLTest z přepínačem -t 3.
 
 
 Možné výsledky testu (Black Box)
 --------------------------------
+Když server odpoví na správu ClientHello z kompresní metodou deflate správou alert například typu fatal error (0x02) a následně nebude pokračovat z vytvářením TLS spojení, tak webový server není zranitelný na CRIME. Když bude ale server dále pokračovat v procesu vytváření spojení, tak server může být zranitelný. Útočník totiž musí být schopen sledovat velkost zašifrovaných správ aby mohl využít tuto zranitelnost.
 
 
 Obtížnost (Black Box)
 ---------------------
-Snadné / Střední / Obtížné
+Střední
 
 
 Časová náročnost v minutách (Black Box)
 ---------------------------------------
-
+10 minut
 
 ============================================================================================================
 
 
 Cíl testu - úkol (White Box)
 ----------------------------
+Ověřte, že webový server a knihovna která implementuje protokol SSL/TLS není nakonfigurován tak aby dovolil ustanovení kompresních metod typu deflate.
 
 
 Popis testu (White Box)
 -----------------------
+Úkolem tohoto testu je ověřit, zda je webový server správně nakonfigurován a nedovoluje ustanovení kompresní metody deflate pomocí protokolu SSL/TLS.
 
 
 Jak provést test manuálně (White Box)
 -------------------------------------
+Provedení testu záleží na konkrétní implementaci webového serveru a je potřeba zkontrolovat jestli je v konfiguračních souborech webového serveru nebo knihovny protokolu SSL/TLS vypnuto nastavení kompresní metody gzip.
 
 
 Jak provést test pomocí automatických nástrojů (White Box)
 ----------------------------------------------------------
+Test lze provést pomocí nástroje SSLTest z přepínačem -t 3.
 
 
 Možné výsledky testu (White Box)
 --------------------------------
-
+Jestli sa v konfiguračních souborech nachází konfigurace kompresních metod tak může být server zranitelný na CRIME. Útočník totiž musí být schopen sledovat velkost zašifrovaných správ aby mohl využít tuto zranitelnost.
 
 Obtížnost (White Box)
 ---------------------
-Snadné / Střední / Obtížné
+Střední
 
 
 Časová náročnost v minutách (White Box)
 ---------------------------------------
-
+15 minuty
 
 
 ============================================================================================================
 
 Reference
 ---------
+https://beaglesecurity.com/blog/vulnerability/ssl-compression-methods.html

@@ -3,15 +3,13 @@ Popis útoku
 
 Název
 -----
+CRIME (Compression Ratio Info-leak Made Easy)
 
 
 Rodičovský útok (pouze pokud se jedná o variantu útoku)
 -------------------------------------------------------
-
+Phishing útok který je potřebný na provedení CRIME útoku. Pomocí phishing útoku je útočník schopný infikovat webový prohlížeč oběti tak aby mohl zasílat HTTP dotazy a sledovat odpovědi těchto dotazů (napr. JavaScript code injection).
 
 Popis útoku
 -----------
-
-
-Dopady (Vyplnit pouze pokud se nejedná o variantu útoku)
---------------------------------------------------------
+Útočník nejprve musí získat přístup k oběti který mú dovoluje posílat HTTP dotazy na zranitelný webový server a který mu umožňuje sledovat délku HTTP odpovědí. Následně bude zasílat HTTP dotazy na zranitelný server v kterých bude měnit uživatelský vstup který se projeví v HTTP odpovědi. Když útočník dostane odpověď která má délku menší jako ostatní má potvrzené že právě tahle volba parametru je správná protože se shoduje nejvíc z hledanou hodnotou. Toto může útočník opakovat pro každý znak tokenu nebo parametru v HTTP hlavičce který chce útočník odhalit.

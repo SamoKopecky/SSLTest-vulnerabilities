@@ -3,52 +3,58 @@ Popis zranitelnosti
 
 Název
 -----
+CRIME (Compression Ratio Info-leak Made Easy)
 
 
 Popis zranitelnosti
 -------------------
-
+Zranitelnost CRIME zneužívá mechanizmus kompresi dat. Komprese je využita pro redukovaní množství dát, které je potřebné poslat. Když se posílá jedno slovo mnoho krát je možné toto slovo reprezentovat jako kód který má menší velkost jako původní slovo. Toto vede k snížení potřebné šířky pásma pro přenos tyhle dát. CRIME zranitelnost je podobná zranitelnosti BREACH jediný rozdíl je že CRIME využívá kompresní metodu deflate v protokolu SSL/TLS a BREACH využívá kompresní metody gzip a deflate přímo v protokolu HTTPS. Protokol TLS je právě využívaní v protokolu HTTPS na zabezpečení správ. Kompresní metoda se v protokolu SSL/TLS určuje v správách Client a Server Hello. Když klient inicializuje TLS spojení nastaví parametr Compression Methods na hodnotu 0x01 (deflate), server ale musí v ServerHello také nastavit parametr Compression methods na stejnou hodnotu 0x01 aby protokol TLS využíval kompresní metodu deflate pro komunikaci. CRIME můžeme využít na dešifrovaní některých informací v HTTP správách (viz dopady). Odhlení tajných informací pracuje na základe porovnávaní délky přímených odpovědí na HTTP dotazy. Když je délka jedné HTTP odpovědi menší jako všechny ostatní je z toho poznat že parametr který útočník mění v každém dotazu se rovná hledané položce v HTTP odpovědi. 
 
 Příčiny
 -------
-Příčinou je ...
+Příčinou je existence tkz. compression oracle, který umožňuje z délky komprimovaných dát zjistit jestli se nějaká sequence dát opakuje v odpovědi správy, která je zašifrovaná pomocí protokolu SSL/TLS.
 
 
 Projevy
 -------
-Zranitelnost se projevuje ...
+Zranitelnost se projevuje zvýšením obsahu sítového přenosu protože útočník musí posílat několika tisíce požadavku na zranitelný server aby dokázal odhalit zašifrované informace.
 
 
 Dopady
 ------
-Útočník ...
+Útočník dokáže získat citlivé informace ze správ které jsou šifrované pomocí protokolu SSL/TLS jako například HTTPS hlavičky. Mezi této citlivé informace patří  například cookie parametre nebo jiné tokeny které webový server využívá k autentizaci které může dále zneužít pro zosobnění oběti.
 
 
 Náprava / doporučení
 --------------------
-Náprava spočívá v ...
+Náprava spočívá v deaktivaci kompresní metody deflate, která je využívaná protokolem SSL/TLS.
 
 
 Závažnost
 ---------
-Informační / Nízká / Střední / Vysoká / Kritická
+Nízká
 
 
 CVSS skóre
 ----------
+2.6
 
 
 CVSS string
 -----------
+CVSS:2.0/AV:N/AC:H/Au:N/C:P/I:N/A:N
 
 
 CVE
 ---
+CVE-2012-4929
 
 
 CWE
 ---
+CWE-310: Cryptographic Issues
 
 
 Možné útoky
 -----------
+Získaní cookie tokenu.

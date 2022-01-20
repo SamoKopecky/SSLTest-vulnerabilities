@@ -6,7 +6,7 @@ SSLTest tool: https://github.com/SamoKopecky/SSLTest
 ## Notes done for
 - [x] BREACH
 - [x] CCS Injection
-- [ ] CRIME
+- [x] CRIME
 - [ ] DROWN
 - [ ] Fallback SCSV
 - [ ] Foward Secrecy

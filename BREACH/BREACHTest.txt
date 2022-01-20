@@ -30,7 +30,7 @@ Test lze provést pomocí nástroje SSLTest z přepínačem -t 1.
 
 Možné výsledky testu (Black Box)
 --------------------------------
-Když server odpoví na GET/HEAD požadavek z přijatými kompresními metodami ještě to neznamená že server je 100% zranitelný. Server musí taktéž být zranitelný na útok který umožní útočníkovy posílat HTTP požadavky na zranitelný server pomocí oběti která má přístup do zranitelného systému. Útočník musí taktéž mít možnost porovnávat délku HTTP odpovědí. Tohle se dá docílit pomocí útoku typu MitM (Man in the Middle) nebo phishingu.
+Když server odpoví na GET/HEAD požadavek z přijatými kompresními metodami ještě to neznamená že server je 100% zranitelný. Server musí taktéž být zranitelný na útok který umožní útočníkovy posílat HTTP požadavky na zranitelný server pomocí oběti která má přístup do zranitelného systému. Útočník musí taktéž mít možnost porovnávat délku HTTP odpovědí.
 
 
 Obtížnost (Black Box)
@@ -67,7 +67,7 @@ Test lze provést pomocí nástroje SSLTest z přepínačem -t 1.
 
 Možné výsledky testu (White Box)
 --------------------------------
-Když má server nakonfigurovaní kompresní metody gzip nebo deflate, stále to neznamená že server je zranitelný na BREACH. Server musí taktéž být zranitelný na útok který umožní útočníkovy posílat HTTP požadavky na zranitelný server pomocí oběti která má přístup do zranitelného systému. Útočník musí taktéž mít možnost porovnávat délku HTTP odpovědí. Tohle se dá docílit pomocí útoku typu MitM (Man in the Middle) nebo phishingu.
+Když má server nakonfigurovaní kompresní metody gzip nebo deflate, stále to neznamená že server je zranitelný na BREACH. Server musí taktéž být zranitelný na útok který umožní útočníkovy posílat HTTP požadavky na zranitelný server pomocí oběti která má přístup do zranitelného systému. Útočník musí taktéž mít možnost porovnávat délku HTTP odpovědí.
 
 Obtížnost (White Box)
 ---------------------

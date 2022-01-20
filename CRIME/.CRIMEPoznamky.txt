@@ -1,0 +1,3 @@
+U Popisu whitebox testu som popísal zranitelnost všeobecne pretože whitebox test je robený inak na každej implementácií webového serveru pretože v každom webovom serveri sa to konfiguruje inak. To isté som spravil aj v BREACH whitebox testu.
+
+Útok typu BREACH a CRIME je rovnaký takže preto sú popisy rovnaké. Niektoré položky v popisu zranitelnosti sa tiež opakujú.
