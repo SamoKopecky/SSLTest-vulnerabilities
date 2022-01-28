@@ -7,7 +7,7 @@ SSLTest tool: https://github.com/SamoKopecky/SSLTest
 - [x] BREACH
 - [x] CCS Injection
 - [x] CRIME
-- [ ] DROWN
+- [x] DROWN
 - [ ] Fallback SCSV
 - [ ] Foward Secrecy
 - [ ] FREAK

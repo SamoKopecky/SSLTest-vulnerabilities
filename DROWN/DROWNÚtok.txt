@@ -3,15 +3,14 @@ Popis útoku
 
 Název
 -----
-
-
-Rodičovský útok (pouze pokud se jedná o variantu útoku)
--------------------------------------------------------
+DROWN (Decrypting RSA with Obsolete and Weakened eNcryption)
 
 
 Popis útoku
 -----------
+Útok začíná tým, že útočník zachytává velký počet TLS handshake spojení (napr. 1000). S této množiny TLS spojení útočník vybere spojení, které obsahuje zašifrovaný symetrický klíč (ciphertext), který má po transformaci do SSLv2 ciphertextu správný formát RSA PKCS# v1.5 paddingu. Díky správné transformaci do SSLv2 formátu pozná útočník část plaintextu protože pozná formát RSA paddingu. Dále je využit Bleichenbacher Oracle pomocí kterého je útočník schopný dešifrovat prvních 40b ciphertextu díky export symetrickým šifrám (40b šifrovaných + 88b nešifrovaných) využívaným v protokolu SSLv2. Tento útok v průměre zabere 10000 dotazů na oracla. Dešifrovaný SSLv2 symetrický klíč útočník dále přetransformuje do TLS klíče, pomocí kterého je schopný dešifrovat jedno zachycené TLS spojení.
 
 
 Dopady (Vyplnit pouze pokud se nejedná o variantu útoku)
 --------------------------------------------------------
+TODO

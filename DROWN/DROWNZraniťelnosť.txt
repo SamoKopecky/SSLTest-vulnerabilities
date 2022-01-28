@@ -3,52 +3,63 @@ Popis zranitelnosti
 
 Název
 -----
+DROWN (Decrypting RSA with Obsolete and Weakened eNcryption)
 
 
 Popis zranitelnosti
 -------------------
+Zranitelnost využívá zároveň protokol SSLv2 a jeden z protokolů SSLv3, TLSv1.{0,1,2} a zneužívá algoritmus RSA. Protokol RSA je v tomto případe využit jako šifrovací algoritmus pro ustanovení sdíleného klíče, který se dále využívá na šifrovaní pomocí algoritmů symetrické kryptografie. Při výměně klíčů pomocí algoritmu RSA je nejprv vygenerovaná náhodná hodnota která se bude používat jako symetrický klíč, tahle hodnota je pak zašifrovaná veřejní klíčem serverového certifikátu. Zašifrovaný klíč je následně odeslán serveru který dešifruje správu svým privátním klíčem.
 
+SSLv2 využívá tkz. export kryptografické sady které pri výměně klíče pomocí algoritmu RSA šifruje jenom prvních 40b klíče. Ostatních je nešifrovaných.
+
+Tato zranitelnost dále využívá Bleichenbacher Oracle pomocí kterého je možné dešifrovat tenhle 40b dlouhý klíč. Když útočník získá znalost symetrického klíče dokáže přetransformovat tenhle 128b klíč na symetrický klíč který se využívá v protokolu TLS. Teď se zranitelnost dá využít na dešifrovaní zachyceného TLS spojení. Táto zranitelnost ale neodhaluje privátní klíč serverového certifikátu.
 
 Příčiny
 -------
-Příčinou je ...
+Příčinou je využitý slabého šifrovaní protokolem SSLv2, kde pro zašifrovaní tajemství o délce 128b šifruje jenom prvních 40b a ostatních 88b posílá jenom v otevřené forme.
 
 
 Projevy
 -------
-Zranitelnost se projevuje ...
+Zranitelnost se projevuje zvýšením sítového přenosu protože DROWN útok využívá tkz. Bleichenbacher Oracle na získaní session key TLS spojení. Útočník musí poslat v průměre 10000 správ na oracle server aby byl útok úspěšný.
 
 
 Dopady
 ------
-Útočník ...
+Útočník je schopný pomocí této zranitelnosti získat tkz. session key zachyceného TLS spojení a tým pádem dešifrovat tuhle komunikaci.
 
 
 Náprava / doporučení
 --------------------
-Náprava spočívá v ...
+Náprava spočívá v správné konfiguraci webového serveru tak aby nepodporoval protokol SSLv2. Další doporučení je nastavit konfiguraci tak aby server nepodporoval ustanovení spojení pomocí kryptografické sady která obsahuje algoritmus pro výměnu klíče RSA.
 
 
 Závažnost
 ---------
-Informační / Nízká / Střední / Vysoká / Kritická
+Střední
 
 
 CVSS skóre
 ----------
+5.9
 
 
 CVSS string
 -----------
+CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:N/A:N
 
 
 CVE
 ---
+CVE-2016-0800
 
 
 CWE
 ---
+CWE-200: Exposure of Sensitive Information to an Unauthorized Actor
+CWE-310: Cryptographic Issues
 
 
 Možné útoky
 -----------
+Získaní cookie dat nebo hesla z HTTPS přenosu

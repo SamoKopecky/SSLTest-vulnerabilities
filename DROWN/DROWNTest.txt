@@ -3,75 +3,86 @@ Popis testu
 
 Název
 -----
-
+DROWN (Decrypting RSA with Obsolete and Weakened eNcryption)
 
 ============================================================================================================
 
 
 Cíl testu - úkol (Black Box)
 ----------------------------
-Ověřte, že ...
+Ověřte, že testovaný webový server nevyužívá knihovnu protokolu SSL/TLS která podporuje verzi SSLv2. Jestli webový server podporuje SSLv2 je také potřeba ověřit jestli ostatní verze protokolu SSL/TLS umožňují inicializaci spojení z algoritmem pro výměnu klíče RSA.
+
 
 Popis testu (Black Box)
 -----------------------
-Úkolem tohoto testu je ověřit, zda ...
+Úkolem tohoto testu je ověřit, zda webový server neumožní inicializaci spojení pomocí protokolu SSLv2 a s algoritmem pro výměnu klíče RSA.
 
 
 Jak provést test manuálně (Black Box)
 -------------------------------------
+Pro otestovaní webového serveru je potřeba poslat správu ClientHello protokolu SSLv2 a sledovat odpověď serveru. Následně je potřeba postupně posílat správy ClientHello verze protokolu jiné než SSLv2 které obsahují všechny kryptografické sady (cipher suite) které využívají protokol RSA na ustanovení klíče. Když server přímé ClientHello, je potřeba odstranit přijatu sadu s listu všechen RSA sad a poslat další správu ClientHello která neobsahuje přijatu sadu serverem. Tento proces se opakuje až dokud server odpoví chybou nebo se vyčerpají všechny kryptografické sady.
 
 
 Jak provést test pomocí automatických nástrojů (Black Box)
 ----------------------------------------------------------
+Test lze provést pomocí nástroje SSLTest z přepínačem -t 4.
 
 
 Možné výsledky testu (Black Box)
 --------------------------------
+Když server odpoví správou ServerHello na prvotní SSLv2 ClientHello správu, je možné že server je zranitelný na DROWN. Když ale server ještě taky odpoví kladně správou ServerHello na ClientHello která obsahuje kryptografickou sadu s algoritmem RSA pro výměnu klíče tak je server zranitelný na DROWN.
 
 
 Obtížnost (Black Box)
 ---------------------
-Snadné / Střední / Obtížné
+Obtížné
 
 
 Časová náročnost v minutách (Black Box)
 ---------------------------------------
-
+60 minut
 
 ============================================================================================================
 
 
 Cíl testu - úkol (White Box)
 ----------------------------
+Ověřte, že testovaný webový server neumožňuje ustanovení spojení na protokolu SSL/TLS verzi SSLv2 a že zároveň nepodporuje žádné kryptografické sady s protokolem pro výměnu klíče RSA. 
 
 
 Popis testu (White Box)
 -----------------------
+Úkolem tohoto testu je ověřit, zda je webový server správně nakonfigurován. Jako první je nutné zkontrolovat jestli je nastavená podpora protokolu SSLv2 v konfiguračním souboru webového serveru. Dále je potřeba otestovat jestli server podporuje algoritmus RSA pro výměnu klíče, tato konfigurace se nachází v stejném konfiguračních souboru. 
 
 
 Jak provést test manuálně (White Box)
 -------------------------------------
+Konfigurace se liší v jednotlivých webových serverech. Například v serveru nginx se konfigurace nachází v souboru /usr/local/nginx/nginx.conf. Pro server nginx je potřeba zkontrolovat hodnotu řetězce ssl_protocols. Konfigurace kryptografických sad se zase dá zkontrolovat v konfiguračních souboru s položkou ssl_ciphers, kde se určují jaké sady bude server ponoukat. Je potřeba aby se v tomto řetězci nacházel řetězec "!kRSA" který znemožňuje ustanovení RSA algoritmu pro výměnu klíče.
 
 
 Jak provést test pomocí automatických nástrojů (White Box)
 ----------------------------------------------------------
+Test lze provést pomocí nástroje SSLTest z přepínačem -t 4.
 
 
 Možné výsledky testu (White Box)
 --------------------------------
+Jestli se v konfiguračních souborech nachází konfigurace protokolu SSLv2 a zároveň je povolené ustanovení spojení pomocí kryptografické sady která obsahuje protokol RSA pro výměnu klíče, tak server je zranitelný na DROWN.
 
 
 Obtížnost (White Box)
 ---------------------
-Snadné / Střední / Obtížné
+Střední
 
 
 Časová náročnost v minutách (White Box)
 ---------------------------------------
-
+10 minut
 
 
 ============================================================================================================
 
 Reference
 ---------
+https://drownattack.com/drown-attack-paper.pdf
+https://en.wikipedia.org/wiki/DROWN_attack
